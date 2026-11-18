@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SenaTop - Teste de Velocidade e Dados</title>
+    <!-- Importando a fonte Montserrat do Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-main: #0f172a;
+            --bg-card: #1e293b;
+            --bg-box: #0f172a;
+            --border-color: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --secondary-btn: #334155;
+            --secondary-hover: #475569;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: var(--bg-card);
+            padding: 36px 32px;
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+            max-width: 540px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--accent);
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 400;
+            margin-bottom: 26px;
+        }
+
+        .info-box {
+            text-align: left;
+            margin-bottom: 26px;
+            background: var(--bg-box);
+            padding: 18px 20px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .info-box p {
+            margin: 10px 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            word-break: break-word;
+        }
+
+        .info-box strong {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-right: 4px;
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .btn-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 200px;
+            background-color: var(--accent);
+            color: #ffffff;
+            padding: 13px 18px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s, transform 0.15s;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-btn);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            padding: 11px 16px;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--secondary-hover);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>FASTPACK</h1>
+        <p class="subtitle">Teste de velocidade, dados de acesso e utilidades</p>
+
+        <div class="info-box" id="dados-conexao">
+            <p><strong>Seu IP:</strong> <span id="ip-usuario">Carregando...</span></p>
+            <p><strong>Data:</strong> <span id="data-atual"></span></p>
+            <p><strong>Hora:</strong> <span id="hora-atual"></span></p>
+            <p><strong>Fuso Horário:</strong> <span id="fuso-horario"></span></p>
+            <p><strong>Navegador / SO:</strong> <span id="user-agent"></span></p>
+        </div>
+
+        <p class="section-label">Ferramentas de Teste e Rede</p>
+        <div class="btn-group">
+            <a href="https://www.speedtest.net/pt" target="_blank" rel="noopener noreferrer" class="btn">Speedtest.net</a>
+            <a href="https://fast.com/pr/" target="_blank" rel="noopener noreferrer" class="btn">Fast.com</a>
+        </div>
+        <div class="btn-group">
+            <a href="https://wifiman.com" target="_blank" rel="noopener noreferrer" class="btn" style="background-color: #0d9488; min-width: 100%;">WiFiman (Ubiquiti)</a>
+        </div>
+
+        <p class="section-label">Aplicativos para celular</p>
+        <div class="btn-group">
+            <a href="https://play.google.com/store/apps/details?id=org.zwanoo.android.speedtest" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Speedtest Android</a>
+            <a href="https://apps.apple.com/br/app/speedtest-teste-de-velocidade/id300704847" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Speedtest iOS</a>
+        </div>
+    </div>
+
+    <script>
+        function atualizarRelogio() {
+            const now = new Date();
+            document.getElementById("data-atual").innerText = now.toLocaleDateString('pt-BR', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            document.getElementById("hora-atual").innerText = now.toLocaleTimeString('pt-BR');
+        }
+
+        atualizarRelogio();
+        setInterval(atualizarRelogio, 1000);
+
+        document.getElementById("fuso-horario").innerText = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        document.getElementById("user-agent").innerText = navigator.userAgent;
+
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("ip-usuario").innerText = data.ip;
+            })
+            .catch(() => {
+                document.getElementById("ip-usuario").innerText = "Não foi possível obter o IP";
+            });
+    </script>
+
+</body>
+</html>
